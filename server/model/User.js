@@ -31,9 +31,7 @@ const schema = new Schema(
   }
 )
 
-schema.virtual('fullName').get(function () {
-  return `${this.firstName} ${this.lastName}`
-})
+
 
 schema.set('toJSON', { hide: 'hash' })
 

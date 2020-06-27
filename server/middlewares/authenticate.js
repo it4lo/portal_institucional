@@ -38,6 +38,7 @@ export default async function (req, res, next) {
   async function needValidate(url) {
     const whitelist = [
       '/session',
+      '/images'
     ]
 
     for (const wlUrl of whitelist) if (url.startsWith(wlUrl)) return false

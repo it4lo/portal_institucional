@@ -1,4 +1,5 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose';
+
 
 const schema = new Schema(
   {
@@ -20,11 +21,11 @@ const schema = new Schema(
     },
     dateOfAdministration: {
       type: Date,
-      required: [true, 'Email is required']
+      required: [true, 'date of adminiatration is required']
     },
     dateOfBirth: {
       type: Date,
-      required: [true, 'Email is required']
+      required: [true, 'date of birth is required']
     },
     occupation: {
       type: String
@@ -33,6 +34,9 @@ const schema = new Schema(
       type: String,
       unique: true,
       required: [true, 'Email is required']
+    },
+    photoURL: {
+      type: String
     },
     aboutMe: {
       type: String
@@ -55,12 +59,9 @@ const schema = new Schema(
   }
 )
 
-schema.virtual('fullName').get(function () {
-  return `${this.firstName} ${this.lastName}`
-})
-
 schema.set('toJSON', { hide: 'hash' })
 
 schema.index({ email: 1 })
 
-export default model('user', schema)
+
+export default model('collaborator', schema)
