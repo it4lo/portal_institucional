@@ -1,7 +1,13 @@
 import { User } from '@models';
 import bcrypt from 'bcryptjs';
 
-export async function createUser({ name, email, password }) {
+
+export async function find(){
+  const users = await User.find().lean();
+  return users;
+}
+
+export async function save({ name, email, password }) {
   const user = await new User({
     name,
     email,
@@ -9,3 +15,4 @@ export async function createUser({ name, email, password }) {
   }).save();
   return user;
 }
+

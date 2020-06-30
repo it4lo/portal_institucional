@@ -1,6 +1,6 @@
 import { Coll } from '@models'
 
-export async function index() {
+export async function find() {
   const colls = await Coll.find().lean();
   const response = colls.map(coll => {
     return { ...coll, photoURL: `http://localhost:3333/images/${coll.photoURL}` };
@@ -8,7 +8,7 @@ export async function index() {
   return response;
 }
 
-export async function store(coll) {
+export async function save(coll) {
   const collaborator = await new Coll(coll).save();
   return collaborator;
 }

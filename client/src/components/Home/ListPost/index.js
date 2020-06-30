@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardPost from './Card'
 import DialogSendPost from './DialogPost';
 import { useStyles } from './style';
-import api from '../../../api';
-
+import api from '../../../services/api';
+import { createPost } from '../../../models/Post';
 
 export default function ListPost() {
 
@@ -14,41 +14,28 @@ export default function ListPost() {
     setOpen(true);
   };
 
-  const onCreatePostInList = async ({ commentPost, detailPost, imgFile }) => {
-    const post = { commentPost, detailPost };
-    /* await onCreatePost(post, imgFile, currentUser); */
+  const onCreatePostInList = async ({ body, detail, imgFile }) => {
+    const post = { body, detail };
+    await createPost(post, imgFile);
     setOpen(false);
   }
 
-  /* useEffect(() => {
-   return firestore.collection("posts").orderBy("createdAt", "desc").onSnapshot(snapshot => {
-     const postsData = [];
-     snapshot.forEach(doc => {
-       postsData.push({ ...doc.data(), id: doc.id})
-     });
-     postsData.unshift({ id: "002", header: true, method: handleClickOpenInsertPost });
-     //console.log(postsData[2].createdAt);
-     setPosts(postsData);
-   });
- }, []);  */
-
-
   useEffect(() => {
-    
     async function fethData() {
-      const users = await api.get('/users');
-      //console.log(users);
+      let postsData = [];
+      const response = await api.get('/posts');
+      postsData = response.data;
+      postsData.unshift({ id: "002", header: true, method: handleClickOpenInsertPost });
+      setPosts(postsData);
     }
-
-    fethData()
-
+    fethData();
   }, [])
 
   return (
     <div className={classes.root} >
       <div style={{ width: "100%", marginBottom: "20px" }}>
         {posts.map((post, i) => (
-          <CardPost key={post.id}
+          <CardPost key={i}
             post={post}
           />
         ))}

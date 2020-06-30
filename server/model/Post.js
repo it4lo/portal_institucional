@@ -15,12 +15,14 @@ const schema = new Schema(
     displayName: {
       type: String
     },
-    userId: {
-      type: String
-    },
     photoURL: {
       type: String
-    }
+    },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'User is required']
+    },
   },
   {
     timestamps: true,
@@ -38,4 +40,4 @@ const schema = new Schema(
 
 schema.set('toJSON', { hide: 'hash' })
 
-export default model('post', schema)
+export default model('Post', schema)

@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     }
   },
   media: {
-    height: 450,
+    height: 250,
     // 16:9
   },
   media0: {

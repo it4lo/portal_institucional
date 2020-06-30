@@ -15,7 +15,8 @@ const schema = new Schema(
       type: String,
       unique: true,
       required: [true, 'Email is required']
-    }
+    },
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
   },
   {
     timestamps: true,
@@ -31,10 +32,8 @@ const schema = new Schema(
   }
 )
 
-
-
 schema.set('toJSON', { hide: 'hash' })
 
 schema.index({ email: 1 })
 
-export default model('user', schema)
+export default model('User', schema)

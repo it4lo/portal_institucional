@@ -1,14 +1,19 @@
 import { Post } from '@models'
 
-export async function index() {
-  const posts = await Post.find().lean();
+export async function find() {
+  const posts = await Post
+    .find()
+    .populate('author', 'name email').lean();
   const response = posts.map(post => {
-    return { ...post, photoURL: `http://localhost:3333/images/${post.photoURL}` };
+    return {
+      ...post,
+      photoURL: `http://localhost:3333/images/${post.photoURL}`
+    }
   });
   return response;
 }
 
-export async function store(post) {
+export async function save(post) {
   const data = await new Post(post).save();
   return data;
 }

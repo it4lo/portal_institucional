@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
-import api from '../../api';
+import api from '../../services/api';
 
 const styles = theme => ({
 	main: {

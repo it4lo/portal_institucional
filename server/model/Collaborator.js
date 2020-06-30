@@ -64,4 +64,4 @@ schema.set('toJSON', { hide: 'hash' })
 schema.index({ email: 1 })
 
 
-export default model('collaborator', schema)
+export default model('Collaborator', schema)

@@ -111,7 +111,7 @@ export default function CardPost({ header, fnHandleClickOpenInsertPost, post, cu
           }
 
           title={post.displayName}
-          subheader={getDateUtil(post.createdAt)}
+          subheader={post.createdAt}
         />
         <CardMedia
           component="img"
@@ -121,7 +121,7 @@ export default function CardPost({ header, fnHandleClickOpenInsertPost, post, cu
 
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {post.commentPost}
+            {post.body}
           </Typography>
         </CardContent>
 
@@ -132,7 +132,7 @@ export default function CardPost({ header, fnHandleClickOpenInsertPost, post, cu
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>
-              {post.detailPost}
+              {post.detail}
             </Typography>
 
           </CardContent>
@@ -150,7 +150,7 @@ export default function CardPost({ header, fnHandleClickOpenInsertPost, post, cu
             <ReplyIcon />
           </IconButton>
 
-          <IconButton style={{ display: post.detailPost ? "" : "none" }}
+          <IconButton style={{ display: post.detail ? "" : "none" }}
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}

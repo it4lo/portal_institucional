@@ -66,8 +66,8 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
   const [openImg, setOpenImg] = useState(false);
   const [imgResult, setImgResult] = useState("");
   const [imgFile, setImgFile] = useState("");
-  const [commentPost, setCommentPost] = useState("");
-  const [detailPost, setDetailComment] = useState("");
+  const [body, setBody] = useState("");
+  const [detail, setDetail] = useState("");
 
   const regEx = /\w+/;
 
@@ -75,7 +75,7 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
     fnSetOpen(false);
   };
 
-  const handleExpandCommentDetail = () => {
+  const handleExpandDetail = () => {
     setOpenDetail(!openDetail);
   };
 
@@ -96,12 +96,11 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
   }
 
   const onCloseVerifyAndCreatePost = () => {
-    fnOnCreatePostInList({commentPost, detailPost, imgFile});
-    setCommentPost("");
-    setDetailComment("");
+    fnOnCreatePostInList({ body, detail, imgFile });
+    setBody("");
+    setDetail("");
     setImgFile("");
     setImgResult("");
-    //handleClose(); 
   }
 
   return (
@@ -113,13 +112,13 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
         </DialogTitle>
         <DialogContent dividers>
           <TextField
-            id="comment"
+            id="body"
             label="Texto"
             multiline
             fullWidth
-            value={commentPost}
+            value={body}
             rows={1}
-            onChange={e => setCommentPost(e.target.value)}
+            onChange={e => setBody(e.target.value)}
             variant="outlined"
           />
 
@@ -131,15 +130,13 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
               label="Detalhes da publicação"
               multiline
               fullWidth
-              value={detailPost}
+              value={detail}
               rows={5}
-              onChange={e => setDetailComment(e.target.value)}
+              onChange={e => setDetail(e.target.value)}
               variant="outlined"
             />
             <Divider style={{ marginBottom: "10px", marginTop: "10px" }} />
           </Collapse>
-
-
 
           <Collapse in={openImg} timeout="auto" unmountOnExit>
             <img id={"imgPost"} alt="" src={imgResult} style={{ width: "60%", height: "300px", marginLeft: "auto", marginRight: "auto" }}>
@@ -171,7 +168,7 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
 
             <Grid item xs={4}>
               <IconButton
-                onClick={handleExpandCommentDetail}
+                onClick={handleExpandDetail}
                 aria-expanded={openDetail}
                 aria-label="Inserir detalhes">
                 <DetailIcon />
@@ -181,7 +178,7 @@ export default function DialogSendPost({ open, fnSetOpen, fnOnCreatePostInList }
 
           </Grid>
 
-          <Button autoFocus onClick={onCloseVerifyAndCreatePost} style={{ display: regEx.test(commentPost) ? "" : "none" }} color="primary">
+          <Button autoFocus onClick={onCloseVerifyAndCreatePost} style={{ display: regEx.test(body) ? "" : "none" }} color="primary">
             Enviar
           </Button>
         </DialogActions>

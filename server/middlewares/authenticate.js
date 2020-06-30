@@ -27,7 +27,7 @@ export default async function (req, res, next) {
 
     const dedoced = await promisify(jwt.verify)(token, configAuth.secret);
 
-    res.userId = dedoced.id;
+    req.userId = dedoced.id;
 
     return next();
 
@@ -38,7 +38,8 @@ export default async function (req, res, next) {
   async function needValidate(url) {
     const whitelist = [
       '/session',
-      '/images'
+      '/images',
+      '/users'
     ]
 
     for (const wlUrl of whitelist) if (url.startsWith(wlUrl)) return false
