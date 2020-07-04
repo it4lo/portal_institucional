@@ -23,9 +23,10 @@ const requestHandler = (request) => {
 
 const errorHandler = (error) => {
   if (isHandlerEnabled(error.config)) {
-     if(error.response.status === 401){
-        logout(); 
-     }
+    //console.log(error)
+    if (error.response.status === 401) {
+      logout();
+    }
   }
   return Promise.reject({ ...error })
 }

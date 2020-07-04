@@ -6,10 +6,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import { useTheme } from '@material-ui/core/styles';
-
+import clsx from 'clsx';
 import ListItemLink from '../../components/ListItemLink'
 import MenuUtil from '../../utils/menuUtils'
 import { useStyles } from './style';
+
+import {
+  NavHeaderMockUp
+} from '../Layout';
 
 export default function DrawerCustom(props) {
 
@@ -20,15 +24,21 @@ export default function DrawerCustom(props) {
 
   return (
     <Drawer
-      className={classes.drawer}
-      variant="persistent"
-      anchor="left"
-      open={open}
+      variant="permanent"
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: open,
+        [classes.drawerClose]: !open,
+      })}
       classes={{
-        paper: classes.drawerPaper,
+        paper: clsx({
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        }),
       }}
+
     >
       <div className={classes.drawerHeader}>
+        <NavHeaderMockUp username={"Ítalo Almeida"}></NavHeaderMockUp>
         <IconButton onClick={handleDrawer}>
           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
@@ -40,14 +50,7 @@ export default function DrawerCustom(props) {
         ))}
       </List>
       <Divider />
-      {/* <List>
-      {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-    </List> */}
+      
     </Drawer>
 
   )

@@ -3,7 +3,7 @@ import CardPost from './Card'
 import DialogSendPost from './DialogPost';
 import { useStyles } from './style';
 import api from '../../../services/api';
-import { createPost } from '../../../models/Post';
+import { save, find } from '../../../models/Post';
 
 export default function ListPost() {
 
@@ -16,24 +16,25 @@ export default function ListPost() {
 
   const onCreatePostInList = async ({ body, detail, imgFile }) => {
     const post = { body, detail };
-    await createPost(post, imgFile);
+    await save(post, imgFile);
     setOpen(false);
   }
 
   useEffect(() => {
     async function fethData() {
-      let postsData = [];
-      const response = await api.get('/posts');
-      postsData = response.data;
-      postsData.unshift({ id: "002", header: true, method: handleClickOpenInsertPost });
-      setPosts(postsData);
+      try {
+        setPosts(await find(handleClickOpenInsertPost));
+      } catch (error) {
+        console.log(error);
+      }
     }
     fethData();
   }, [])
 
   return (
     <div className={classes.root} >
-      <div style={{ width: "100%", marginBottom: "20px" }}>
+      <div style={{ width: "70%", marginBottom: "20px", marginLeft: "auto", marginRight: "auto"}}>
+
         {posts.map((post, i) => (
           <CardPost key={i}
             post={post}

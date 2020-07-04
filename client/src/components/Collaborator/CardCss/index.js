@@ -40,8 +40,8 @@ function CardCss({ collaborator }) {
                 alt="Avatar" 
                 className={classes.image} onClick={setRotationState}></img>
                 <div className={classes.containerText}>
-                  <h3><b>{collaborator.nomeCompleto}</b></h3>
-                  <p>{collaborator.cargo}</p>
+                  <h3><b>{collaborator.fullName}</b></h3>
+                  <p>{collaborator.occupation}</p>
                   <div style={{ borderBottom: "1px solid #808080b0", height: 1 }}></div>
 
                   <div className={clsx(classes.divNetWork, {
@@ -86,8 +86,8 @@ function CardCss({ collaborator }) {
               <div className={classes.container} onClick={setRotationState}>
                 <div style={{ margin: "15px", textAlign: "justify" }}>
                   <img src={collaborator.photoURL} alt="Avatar" style={{ width: "60px", height: "60px", borderRadius: "50%" }}></img>
-                  {collaborator.descricao ?
-                    collaborator.descricao :
+                  {collaborator.aboutMe ?
+                    collaborator.aboutMe :
                     'Edite seu perfil e adicione uma descrição breve para que a/o conheçam melhor'}
                 </div>
               </div>

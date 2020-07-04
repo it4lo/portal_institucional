@@ -23,6 +23,8 @@ const schema = new Schema(
       ref: 'User',
       required: [true, 'User is required']
     },
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+    favs: [{ type: Schema.Types.ObjectId, ref: 'Fav' }]
   },
   {
     timestamps: true,

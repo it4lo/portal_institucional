@@ -44,6 +44,21 @@ const schema = new Schema(
     gender: {
       type: String
     },
+    management: {
+      type: String
+    },
+    facebook: {
+      type: String
+    },
+    instagram: {
+      type: String
+    },
+    linkedin: {
+      type: String
+    },
+    twitter: {
+      type: String
+    },
   },
   {
     timestamps: true,

@@ -9,7 +9,6 @@ export default async function (req, res, next) {
   //Verify white list, if exists return next route
   if (!await needValidate(url)) return next();
 
-
   const authHeader = req.headers.authorization;
 
   //Verify header of authorization
@@ -32,7 +31,9 @@ export default async function (req, res, next) {
     return next();
 
   } catch (error) {
-    return res.json({ errr: 'Token is not valid' });
+    if (error.name === "TokenExpiredError") { 
+      return res.status(401).json({ error: "Token expired" });
+    }
   }
 
   async function needValidate(url) {

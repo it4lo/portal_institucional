@@ -41,6 +41,9 @@ export default function HomeComponent() {
               <ListBirthDay />
             </Grid>
           </Grid>
+
+          
+
         </>
 
       </main>

@@ -16,7 +16,11 @@ const schema = new Schema(
       unique: true,
       required: [true, 'Email is required']
     },
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+    photoURL: {
+      type: String,
+    },
+    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
   },
   {
     timestamps: true,

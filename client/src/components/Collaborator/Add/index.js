@@ -1,11 +1,6 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
-
 import clsx from 'clsx';
-import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
 import SaveIcon from '@material-ui/icons/Save';
@@ -23,6 +18,7 @@ import Input from '../../Form/Input';
 import InputFile from '../../Form/inputFile';
 import InputDate from '../../Form/inputDate';
 import InputSelect from '../../Form/inputSelect';
+import * as Coll from '../../../models/Collaborator'
 
 
 export default function AddCollarator({ managements, positions }) {
@@ -35,10 +31,8 @@ export default function AddCollarator({ managements, positions }) {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
   const [typeMessage, setTypeMessage] = useState("success");
-  
-  //const [option, setOption] = useState({});
+  const [collaborator, setCollaborator] = useState({});
 
-  
 
   const handleImageAsFile = (e) => {
     const image = e.target.files[0]
@@ -50,20 +44,28 @@ export default function AddCollarator({ managements, positions }) {
 
   const coll = history.location.state ? {
     ...history.location.state.coll,
-    dataAdmissao: formatDate(history.location.state.coll.dataAdmissao),
-    dataNascimento: formatDate(history.location.state.coll.dataNascimento)
+    dateOfAdministration: formatDate(history.location.state.coll.dateOfAdministration),
+    dateOfBirth: formatDate(history.location.state.coll.dateOfBirth)
   } : {};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      /* const data = history.location.state ? {
+        ...history.location.state.coll,
+        dateOfAdministration: formatDate(history.location.state.coll.dateOfAdministration),
+        dateOfBirth: formatDate(history.location.state.coll.dateOfBirth)
+      } : {}; */
+      //formRef.current.setFieldValue('fullName', 'John Doe');
+      //formRef.current.setData({});
+    };
+    fetchData();
+  }, [history.location.state])
 
   const [imgFile, setImgFile] = useState(coll.photoURL);
 
   function formatDate(date) {
-    let dt = new Date(date.seconds * 1000);
-
-    const day = dt.getDate();
-    const month = (dt.getMonth() + 1) >= 10 ? dt.getMonth() + 1 : `0${(dt.getMonth() + 1)}`;
-    const year = dt.getFullYear();
-
-    return `${year}-${month}-${day}`;
+    //const dt = new Date(date.substring(0, 10).split('-'));
+    return date.substring(0, 10);
   }
 
   function setPreview(image) {
@@ -85,17 +87,16 @@ export default function AddCollarator({ managements, positions }) {
   async function handleSubmit(data) {
     setSuccess(false);
     setLoading(true);
-    
+
     try {
 
       const schema = Yup.object().shape({
-        nomeCompleto: Yup.string().required('Nome completo é obrigatório'),
-        nomeSocial: Yup.string().required('Seu nome social é obrigatório'),
+        fullName: Yup.string().required('Nome completo é obrigatório'),
+        socialName: Yup.string().required('Seu nome social é obrigatório'),
         email: Yup.string().required('O email é obrigatório'),
-        //cargo: Yup.string().required('O cargo é obrigatório'),
-        gestao: Yup.string().required('A Gestão é obrigatória'),
-        dataAdmissao: Yup.string().required('A data de admissão é obrigatório'),
-        dataNascimento: Yup.string().required('A data de nascimento é orbigatória'),
+        management: Yup.string().required('A Gestão é obrigatória'),
+        dateOfAdministration: Yup.string().required('A data de admissão é obrigatório'),
+        dateOfBirth: Yup.string().required('A data de nascimento é orbigatória'),
       });
 
       await schema.validate(data, {
@@ -104,10 +105,8 @@ export default function AddCollarator({ managements, positions }) {
 
       const newData = {
         ...coll, ...data,
-        dia: data.dataNascimento.split('-')[2],
-        mes: data.dataNascimento.split('-')[1],
-        dataAdmissao: new Date(data.dataAdmissao.split('-')),
-        dataNascimento: new Date(data.dataNascimento.split('-'))
+        day: data.dateOfBirth.split('-')[2],
+        month: data.dateOfBirth.split('-')[1],
       };
 
       if (!newData.photoURL) {
@@ -115,17 +114,20 @@ export default function AddCollarator({ managements, positions }) {
       }
 
       for (var [key, value] of Object.entries(newData)) {
-        if(value === ""){ delete newData[key] }  
+        if (value === "" || value === "undefined") { delete newData[key] }
       }
-      
-      /* if (!newData.id || newData.id === "") {
-        await onCreateColl(newData, currentUser, fnSetLoading, setMessage);
-      } else {
-        await onUpdateColl(newData, currentUser, fnSetLoading, setMessage);
-      } */
 
+      await Coll.save(newData);
+
+      setMessage("Congrats, informações salvas");
+      fnSetLoading();
       formRef.current.setErrors({});
-      //history.push('/collaborator');
+
+      setTimeout(() => {
+        history.push('/collaborator');
+      }, 3000)
+
+
     } catch (err) {
 
       if (err instanceof Yup.ValidationError) {
@@ -148,15 +150,6 @@ export default function AddCollarator({ managements, positions }) {
 
   return (
     <React.Fragment>
-      <CssBaseline />
-
-      <AppBar style={{ background: '#30383c' }}>
-        <Toolbar>
-          <Typography variant="h6">Cadstro de colaborador</Typography>
-        </Toolbar>
-      </AppBar>
-
-      <Toolbar />
       <Container style={{ width: "90%", marginLeft: "auto", marginRight: "auto", marginTop: "5px" }}>
 
         <Form ref={formRef} initialData={coll}
@@ -198,18 +191,15 @@ export default function AddCollarator({ managements, positions }) {
                     src={imgFile} alt='Foto'>
                   </img>
                 </label>
-
-
               </div>
-
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <Input name="nomeCompleto" label="Nome completo"></Input>
+              <Input name="fullName" label="Nome completo"></Input>
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <Input name="nomeSocial" label="Como gosta de ser chamado?"></Input>
+              <Input name="socialName" label="Como gosta de ser chamado?"></Input>
             </Grid>
 
             <Grid item xs={12} sm={4}>
@@ -218,31 +208,30 @@ export default function AddCollarator({ managements, positions }) {
 
             <Grid item xs={12} sm={3}>
               <InputSelect
-                name="gestao"
+                name="management"
                 label="Gestão"
                 options={managements}
-                /* setOption={setOption} */
+              /* setOption={setOption} */
               ></InputSelect>
             </Grid>
 
             <Grid item xs={12} sm={3}>
               <InputSelect
-                name="cargo"
+                name="occupation"
                 label="Cargo"
                 options={positions}
-                //setOption={setOption}
+              //setOption={setOption}
               ></InputSelect>
             </Grid>
 
-          
             <Grid item xs={12} sm={3}>
-              <InputDate name="dataAdmissao" label="Data de admissão"></InputDate>
+              <InputDate name="dateOfAdministration" label="Data de admissão"></InputDate>
 
             </Grid>
 
             <Grid item xs={12} sm={3}>
               <InputDate
-                name="dataNascimento"
+                name="dateOfBirth"
                 label="Data de nascimento"></InputDate>
             </Grid>
 
@@ -263,9 +252,8 @@ export default function AddCollarator({ managements, positions }) {
             </Grid>
 
             <Grid item xs={12}>
-              <Input name="descricao" multiline rows={3} label="Coloque uma breve descrição sobre você, essa decrição vai aparecer no seu cartão"></Input>
+              <Input name="aboutMe" multiline rows={3} label="Coloque uma breve descrição sobre você, essa decrição vai aparecer no seu cartão"></Input>
             </Grid>
-
 
             <Grid item xs={12}>
               <div className={classes.root}>
@@ -304,7 +292,6 @@ export default function AddCollarator({ managements, positions }) {
 
       </Container>
     </React.Fragment>
-
   );
 }
 
