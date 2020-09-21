@@ -16,8 +16,9 @@ const schema = new Schema(
       unique: true,
       required: [true, 'Email is required']
     },
-    photoURL: {
-      type: String,
+    collaborator: {
+      type: Schema.Types.ObjectId,
+      ref: 'Collaborator',
     },
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]

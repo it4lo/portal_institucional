@@ -2,8 +2,6 @@ import { Post } from '@models'
 
 export async function find(userId) {
 
-
-
   const posts = await Post
     .find()
     .populate({
@@ -18,9 +16,6 @@ export async function find(userId) {
     .lean()
 
   const response = posts.map(post => {
-
-
-
     return {
       ...post,
       photoURL: post.photoURL ? `http://localhost:3333/images/${post.photoURL}` : "",
@@ -41,10 +36,3 @@ export async function update(id, post) {
   const data = await Post.findByIdAndUpdate(id, post, { new: true });
   return data;
 }
-
-
-
-
-
-
-

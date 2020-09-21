@@ -54,12 +54,8 @@ export default function CardPost({ header, fnHandleClickOpenInsertPost, post, cu
       <Collapse in={post.header} timeout="auto" unmountOnExit>
 
         <Grid container className={classes.contentHeader} style={{ margin: "10px" }}>
-          <Grid item xs={2}>
-            <Avatar aria-label="recipe" src="" className={classes.avatarLarge}>
-              R
-            </Avatar>
-          </Grid>
-          <Grid item xs={10}>
+          
+          <Grid item xs={12}>
 
             <Button onClick={post.method}
               classes={{

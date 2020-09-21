@@ -33,8 +33,7 @@ var NavContentEx = function NavContentEx(_ref) {
       primary,
       icon,
       to,
-      index: i,
-      key: i
+      index: i
     });
   }), /*#__PURE__*/_react["default"].createElement(_Divider["default"], {
     style: {

@@ -8,9 +8,12 @@ import {
 } from "@mui-treasury/layout";
 
 import {
-  NavHeaderMockUp,
   NavContentMockUp,
 } from '../Layout';
+
+import {
+  NavHeader,
+} from '../Layout2';
 
 
 const Drawer = (props) => {
@@ -23,7 +26,7 @@ const Drawer = (props) => {
     <DrawerSidebar sidebarId="unique_id">
       <CollapseBtn />
       <SidebarContent>
-        <NavHeaderMockUp collapsed={props.sidebar.unique_id.collapsed} username={"Ítalo Almeida"} />
+        <NavHeader />
         <NavContentMockUp />
       </SidebarContent>
     </DrawerSidebar>

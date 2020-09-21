@@ -8,8 +8,8 @@ export async function index(req, res) {
 
 export async function store(req, res) {
   const { name, email, password } = req.body;
-  const user = await repo.save({ name, email, password })
-  return res.json(user);
+  const reponse = await repo.save({ name, email, password })
+  return res.json(reponse);
 }
 
 

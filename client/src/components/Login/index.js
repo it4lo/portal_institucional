@@ -72,19 +72,21 @@ function SignIn(props) {
 			const { email, password } = event.target.elements;
 
 			try {
-	
+
 				const response = await api.post('/session', {
 					email: email.value,
 					password: password.value,
 					handlerEnabled: false
-				},);
+				});
 
-				localStorage.setItem('@IntraAPI', JSON.stringify(response.data));
+				const user = response.data;
 
+				localStorage.setItem('@IntraAPI', JSON.stringify(user));
+				
 				history.push("/");
 				setLoading(false);
 			} catch (error) {
-				
+
 				setShow(true);
 				setLoading(false);
 			}
@@ -148,17 +150,6 @@ function SignIn(props) {
 						{loading && <CircularProgress size={24} className={classes.buttonProgress} />}
 					</Button>
 
-					<Button
-						fullWidth
-						variant="contained"
-						color="secondary"
-						disabled={loading}
-						/* onClick={() => {
-							signInWithGoogle();
-						}} */
-						className={classes.submit}>
-						Google +
-          			</Button>
 
 					<div style={{ display: "flex", justifyContent: "space-between", marginTop: "3vh" }}>
 
@@ -177,15 +168,6 @@ function SignIn(props) {
 			</Paper>
 		</main>
 	)
-
-	/* async function login() {
-		try {
-			//await firebase.login(email, password)
-			props.history.replace('/dashboard')
-		} catch (error) {
-			alert(error.message)
-		}
-	} */
 }
 
 export default withRouter(withStyles(styles)(SignIn))

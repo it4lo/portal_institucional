@@ -57,9 +57,9 @@ export default function ListCollaborator() {
   return (
 
     <List className={classes.root}>
-      {birthDays.map(b => (
-        <>
-          <ListItem alignItems="flex-start">
+      {birthDays.map((b, i) => (
+        <div key={i}>
+          <ListItem  alignItems="flex-start">
             <ListItemAvatar>
               <img src={b.photoURL} alt="Avatar"
                 style={{ width: "45px", height: "45px", borderRadius: "50%" }}></img>
@@ -84,7 +84,7 @@ export default function ListCollaborator() {
           </ListItem>
 
           <Divider variant="inset" component="li" />
-        </>
+        </div>
       ))}
 
     </List>

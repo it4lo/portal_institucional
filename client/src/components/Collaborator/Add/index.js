@@ -18,7 +18,7 @@ import Input from '../../Form/Input';
 import InputFile from '../../Form/inputFile';
 import InputDate from '../../Form/inputDate';
 import InputSelect from '../../Form/inputSelect';
-import * as Coll from '../../../models/Collaborator'
+import * as Coll from '../../../models/Collaborator';
 
 
 export default function AddCollarator({ managements, positions }) {

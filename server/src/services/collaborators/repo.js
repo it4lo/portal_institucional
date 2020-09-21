@@ -17,10 +17,3 @@ export async function update(id, coll) {
   const collaborator = await Coll.findByIdAndUpdate(id, coll, { new: true });
   return collaborator;
 }
-
-
-
-
-
-
-

@@ -10,7 +10,7 @@ import PageAddCollaborator from '../pages/Colls/Add';
 
 import PageCollaborator from '../pages/Colls';
 import PageLogin from '../components/Login';
-import RegisterLogin from '../components/Register';
+import RegisterLogin from '../pages/Register';
 import ResetLogin from '../components/ResetPassword';
 
 import { scheme } from '../config';
