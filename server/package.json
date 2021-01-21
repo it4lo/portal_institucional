@@ -1,7 +1,7 @@
 {
-  "name": "api-sgi",
+  "name": "api-postal",
   "version": "1.0.0",
-  "description": "API FAS- Amazon Sustainable Foundation",
+  "description": "API Portal institucional",
   "main": "index.js",
   "module": "main.js",
   "scripts": {
