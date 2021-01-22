@@ -12,7 +12,7 @@ As stated at the beginning, the project is to help institutional communication.
 
 # License
  
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/it4lo/integration_ngo/blob/master/LICENSE)
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/it4lo/portal_institucional/blob/master/LICENSE)
 
 # Technologies
 
@@ -20,7 +20,7 @@ As stated at the beginning, the project is to help institutional communication.
     - nodejs
     - express https://expressjs.com/  
     - jsonwebtoken https://jwt.io/
-    -  module-alias https://www.npmjs.com/package/module-alias
+    - module-alias https://www.npmjs.com/package/module-alias
     - bcrypts https://www.npmjs.com/package/bcryptjs
     - esm https://www.npmjs.com/package/esm
     - mongoose https://mongoosejs.com/

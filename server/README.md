@@ -15,7 +15,7 @@
 
     Em outras palabras é um meio de autenticar, autorizar e enviar informações entre duas partes assim como diz o texto no site do jwt.io.
     
-  -  module-alias https://www.npmjs.com/package/module-alias
+  - module-alias https://www.npmjs.com/package/module-alias
     
       This lib is one of the most practical things I discovered, It organizes your code and you stop placing those huge imports with the folder path. Just
     add an alias to the folder you want to use and that's it.
