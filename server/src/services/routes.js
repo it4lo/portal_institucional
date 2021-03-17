@@ -17,6 +17,5 @@ export default async function (app) {
   app.use('/positions', positionRoutes);
   app.use('/comments', commentRoutes);
   app.use('/favs', favRoutes);
-  
   return app
 }

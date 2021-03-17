@@ -6,5 +6,5 @@ import router from '../src/services/routes';
 (async function () {
   await config();
   await MongoDB.connect(process.pid)
-  router(app);
+  //await router(app);
 })();

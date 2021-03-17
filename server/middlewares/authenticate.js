@@ -40,7 +40,8 @@ export default async function (req, res, next) {
     const whitelist = [
       '/session',
       '/images',
-      '/users'
+      '/users',
+      '/collaborators'
     ]
 
     for (const wlUrl of whitelist) if (url.startsWith(wlUrl)) return false

@@ -27,3 +27,7 @@ export async function store(req, res) {
       })
     });
 } 
+
+export async function testIndex(req, res){
+  return res.json({test: 'Test ok'});
+}
