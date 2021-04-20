@@ -18,7 +18,7 @@ export async function find(userId) {
   const response = posts.map(post => {
     return {
       ...post,
-      photoURL: post.photoURL ? `http://localhost:3333/images/${post.photoURL}` : "",
+      photoURL: post.photoURL ? `http://localhost:3050/images/${post.photoURL}` : "",
       sizeFavs: post.favs.length,
       sizeComments: post.comments.length,
       fav: post.favs.some(f => String(f.author._id) === String(userId))

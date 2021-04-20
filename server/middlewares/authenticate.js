@@ -6,12 +6,12 @@ export default async function (req, res, next) {
 
   const { url } = req;
 
-  //Verify white list, if exists return next route
+
   if (!await needValidate(url)) return next();
 
   const authHeader = req.headers.authorization;
 
-  //Verify header of authorization
+
   if (!authHeader) {
     return res.status(401).json({ error: 'Token not provided' });
   }

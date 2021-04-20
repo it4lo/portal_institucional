@@ -5,7 +5,7 @@ import Avatar from '../Avatar';
 const NavHeader = () => {
 
   const storeString = localStorage.getItem('@IntraAPI');
-  const URL = 'http://localhost:3333/images/';
+  const URL = 'http://localhost:3050/images/';
   const [urlPhoto, setUrlPhoto] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

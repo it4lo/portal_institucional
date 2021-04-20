@@ -3,7 +3,7 @@ import { getToken, logout } from '../utils/auth';
 
 
 const api = axios.create({
-  baseURL: "http://localhost:3333"
+  baseURL: "http://localhost:3050" //TODO: change to env
 });
 
 api.interceptors.request.use(request => requestHandler(request));

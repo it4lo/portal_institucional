@@ -33,13 +33,13 @@ export default function ListCollaborator() {
       setBirthDays((data.docs.map(doc => ({ ...doc.data(), id: doc.id })))); */
       setBirthDays([{
         nomeCompleto: "Ítalo",
-        photoURL: "http://localhost:3333/images/a234d3f5e8b6-italo.jpg",
+        photoURL: "http://localhost:3050/images/a234d3f5e8b6-italo.jpg",
         dia: "15",
         mes: "08"
       },
       {
         nomeCompleto: "Maria",
-        photoURL: "http://localhost:3333/images/16df92d2da1b-maria.jpg",
+        photoURL: "http://localhost:3050/images/16df92d2da1b-maria.jpg",
         dia: "16",
         mes: "08"
       }])

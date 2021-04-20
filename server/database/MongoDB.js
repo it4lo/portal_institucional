@@ -5,8 +5,8 @@ export default {
   async connect(pid = 'Not informed') {
     const { MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_DB } = process.env
     //const url = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/${MONGO_DB}?retryWrites=true&w=majority`
-    //const url = `mongodb://localhost:27017/intranet`;
-    const url = `mongodb://link-db/intranet`;
+    const url = `mongodb://localhost:27017/intranet`;
+    //const url = `mongodb://link-db/intranet`;
 
 
     const config = {
