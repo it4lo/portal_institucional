@@ -3,7 +3,7 @@ import { Coll } from '@models'
 export async function find() {
   const colls = await Coll.find().lean();
   const response = colls.map(coll => {
-    return { ...coll, photoURL: `http://localhost:3050/images/${coll.photoURL}` };
+    return { ...coll, photoURL: `http://api.interactive-to.com/images/${coll.photoURL}` };
   });
   return response;
 }
